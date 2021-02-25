@@ -171,7 +171,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case IDM_FONT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_FONT), hWnd, Font);
                 InvalidateRect(hWnd, NULL, 1);
-                UpdateWindow(hWnd);
                 break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
@@ -254,6 +253,9 @@ INT_PTR CALLBACK Font(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     switch (message)
     {
     case WM_INITDIALOG:
+        HWND editFont;
+        editFont = GetDlgItem(hDlg, IDC_EDITFONT);
+        SetWindowText(editFont, fontSize);
         return (INT_PTR)TRUE;
 
     case WM_COMMAND:
